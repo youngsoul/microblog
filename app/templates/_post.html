@@ -1,0 +1,9 @@
+{# Jinja2 sub template.  if the outer context includes a 'post' variable #}
+{# then this subtemplate can be include like: #}
+{# {% include '_post.html' %} #}
+<table>
+    <tr valign="top">
+        <td><img src="{{ post.author.avatar(36) }}"></td>
+        <td>{{ post.author.username }} says: <b> {{ post.body }}</b></td>
+    </tr>
+</table>

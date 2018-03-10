@@ -13,9 +13,9 @@ The Video / PDF tutorial can be found at:
 
 ### Progress
 
-Chapter 5: User Logins
+Chapter 6: User Profiles
 
-Section: 5.9
+Section: 6.3
 
 
 ### Flask Migrate

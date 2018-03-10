@@ -2,6 +2,7 @@ from app import db, login
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
 
 # UserMixin makes this class compatible with FlaskLogin
 class User(UserMixin, db.Model):
@@ -12,6 +13,8 @@ class User(UserMixin, db.Model):
     # backref puts a property on the Post class called, 'author'
     # so we can go from a Post and get the Author ( or User )
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -21,6 +24,12 @@ class User(UserMixin, db.Model):
 
     def check_password(self, clear_password):
         return check_password_hash(self.password_hash, clear_password)
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        avatar_url = f"https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}"
+        print(avatar_url)
+        return avatar_url
 
 @login.user_loader
 def load_user(id):
