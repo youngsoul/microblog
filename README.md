@@ -13,9 +13,9 @@ The Video / PDF tutorial can be found at:
 
 ### Progress
 
-Chapter 7: Error Handling
+Chapter 8: Followers
 
-Section: 7.5
+Section: Intro
 
 
 ### Flask Migrate

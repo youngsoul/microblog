@@ -4,6 +4,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 
+followers = db.Table('followers',
+                     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+                     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+                     )
+
 # UserMixin makes this class compatible with FlaskLogin
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +20,12 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    followed = db.relationship('User', secondary=followers,
+                               primaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
+                               backref=db.backref('followers', lazy='dynamic'),
+                               lazy='dynamic'
+                               )
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -31,20 +42,51 @@ class User(UserMixin, db.Model):
         print(avatar_url)
         return avatar_url
 
+
+    def follow(self, followed_user):
+        if not self.is_following(followed_user):
+            self.followed.append(followed_user)
+
+    def unfollow(self, followed_user):
+        if self.is_following(followed_user):
+            self.followed.remove(followed_user)
+
+    def is_following(self, followed_user):
+        return self.followed.filter(followers.c.followed_id == followed_user.id).count() > 0
+
+    def followed_posts(self):
+        followed = Post.query.join(
+            followers,
+            (followers.c.followed_id == Post.user_id)
+        ).filter(
+            followers.c.follower_id == self.id
+        )
+
+        return followed.union(self.posts).order_by(
+            Post.timestamp.desc()
+        )
+
 @login.user_loader
 def load_user(id):
     """
     Used by FlaskLogin to load a user in a persistence independent way.
+
+    This also adds the user reference to the database session.
+
     :param id:
     :return: Instance of the user for the given ID
     """
     return User.query.get(int(id))
 
 class Post(db.Model):
+    """
+    See User:  that model class has added a synthetic 'author' property to Post model class.
+    """
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # author = reference to a User
 
     def __repr__(self):
         return f"<Post {self.body}>"
