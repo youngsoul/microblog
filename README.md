@@ -13,9 +13,9 @@ The Video / PDF tutorial can be found at:
 
 ### Progress
 
-Chapter 6: User Profiles
+Chapter 7: Error Handling
 
-Section: 6.3
+Section: 7.5
 
 
 ### Flask Migrate
@@ -56,5 +56,18 @@ Creates a python session with the flask app available
 See microblog.py for the *@app.shell_context_processor* annotated method which exports all of the objects to the flash shell
 
 
+### Debug Mode
+To enable debug mode there are 2 options:
+
+- export FLASK_DEBUG=1
+
+- in *microblog.py* set debug flag in app.run:  app.run(host='0.0.0.0', debug=True)
+
+
+### Python Debug Email Server
+Python has a debugging smtp server.  This server will not actually send email but instead
+display what the email would have looked like.
+
+*python -m smtpd -n -c DebuggingServer localhost:8025*
 
 
