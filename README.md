@@ -13,7 +13,7 @@ The Video / PDF tutorial can be found at:
 
 ### Progress
 
-Chapter 8: Followers
+Chapter 11: Facelift
 
 Section: Intro
 
