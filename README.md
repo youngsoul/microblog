@@ -70,4 +70,11 @@ display what the email would have looked like.
 
 *python -m smtpd -n -c DebuggingServer localhost:8025*
 
+To configure or override the config.py:
+
+*export MAIL_SERVER=localhost*
+
+*export MAIL_PORT=8025*
+
+
 

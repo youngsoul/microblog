@@ -1,4 +1,12 @@
-2018-03-11 15:02:51,063 ERROR: Exception on /user/susan [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+2018-03-11 11:04:21,098 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:55]
+2018-03-11 11:08:54,989 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:55]
+2018-03-11 11:11:35,879 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 11:11:42,999 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 13:06:44,261 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 13:06:49,023 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 14:54:35,901 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 15:02:41,896 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 15:02:49,480 ERROR: Exception on /user/susan [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -57,30 +65,3 @@ Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 59, in fail
     raise exc(msg, lineno, self.name, self.filename)
 jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
-2018-03-11 15:03:03,186 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 15:06:08,598 ERROR: Exception on /follow/user1 [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
-Traceback (most recent call last):
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
-    raise value
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/app/routes.py", line 136, in follow
-    current_user.follow(user)
-  File "/Users/patryan/Development/python/microblog/app/models.py", line 47, in follow
-    if not self.is_following(followed_user):
-  File "/Users/patryan/Development/python/microblog/app/models.py", line 55, in is_following
-    return self.followed.filter(followers.c.followed_id == followed_user.id).count() > 0
-AttributeError: 'BaseQuery' object has no attribute 'id'
-2018-03-11 15:09:24,096 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 15:11:13,464 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:25:16,495 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
