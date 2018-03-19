@@ -97,4 +97,37 @@ pip install flask-moment
 
 [Moment JS Link](http://momentjs.com)
 
+### Chapter 13: I18n and L10n
+
+**Note that babel cannot use the 3.6 format strings**
+
+This works:
+
+*flash(_('User %(username) does not exist', username=username))*
+
+This does not:
+
+*flash(_('User {username} does not exist'))*
+
+
+pip install flask-babel
+
+Use Babel to extract all of the strings to translate.
+
+create a babel.cfg file
+
+To extract the files:
+
+*pybabel extract -F babel.cfg -k _l -o messages.pot .*
+
+
+To add another language messages.po file:
+
+*pybabel init -i messages.pot -d app/translations -l fr*
+
+*pybabel compile -d app/translations*
+
+To update messages:
+
+Extract the messages.pot file again, it is a transient file that does not need to be source controlled.
 

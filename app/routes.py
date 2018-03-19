@@ -1,11 +1,12 @@
 from app import app, db
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, g
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
+from flask_babel import _, lazy_gettext as _l, get_locale
 
 @app.before_request
 def before_request():
@@ -16,6 +17,7 @@ def before_request():
         # @login.user_loader
         # def load_user(id):
         db.session.commit()
+    g.locale = str(get_locale())
 
 # note that we always have the @app decorators FIRST because the order is important.
 # the login decorator should be the last one.
@@ -29,7 +31,7 @@ def index():
         post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!')
+        flash(_('Your post is now live!'))
         # even though we could render the index.html  here, it is considered
         # bad form to render the template as a result of a post request.
         # therefore, we redirect to force a get request and then render the
@@ -72,7 +74,7 @@ def login():
         # form as form data and valid, and therefore a post
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash(_('Invalid username or password'))
             return redirect(url_for('login'))
 
         # when you get here, it is a valid login
@@ -109,7 +111,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash(_('Congratulations, you are now a registered user!'))
         return redirect(url_for('login'))
 
     return render_template('register.html', title='Register', form=form)
@@ -126,7 +128,7 @@ def reset_password_request():
         if user:
             send_password_reset_email(user)
 
-        flash('Check your email for the instructions to reset your password')
+        flash(_('Check your email for the instructions to reset your password'))
         return redirect(url_for('login'))
 
     # else it was a get so show the form
@@ -144,7 +146,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash(_('Your password has been reset.'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
 
@@ -173,7 +175,7 @@ def edit_profile():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash(_('Your changes have been saved.'))
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         # then a request to view form
@@ -187,17 +189,17 @@ def edit_profile():
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash(f'User {username} does not exist')
+        flash(_('User %(username)s not found.', username=username))
         return redirect(url_for('index'))
 
     if user == current_user:
-        flash(f'You cannot follow yourself!')
+        flash(_('You cannot follow yourself!'))
         return redirect(url_for('user', username=username))
 
     # if you get here everything is ok
     current_user.follow(user)
     db.session.commit()
-    flash(f'You are now following {username}')
+    flash(_('You are now following %(username)', username=username))
     return redirect(url_for('user', username=username))
 
 @app.route('/unfollow/<username>')
@@ -205,16 +207,16 @@ def follow(username):
 def unfollow(username):
     user = User.query.filter_by(username=username)
     if user is None:
-        flash(f'User {username} does not exist')
+        flash(_l('User %(username) does not exist', username=username))
         return redirect(url_for('index'))
 
     if user == current_user:
-        flash(f'You cannot unfollow yourself!')
+        flash(_(f'You cannot unfollow yourself!'))
         return redirect(url_for('user', username=username))
 
     # if you get here everything is ok
     current_user.unfollow(user)
     db.session.commit()
-    flash(f'You are now unfollowing {username}')
+    flash(_('You are now unfollowing %(username)', username=username))
     return redirect(url_for('user', username=username))
 

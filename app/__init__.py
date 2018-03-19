@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -9,6 +9,8 @@ import os
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from flask_babel import Babel, lazy_gettext as _l
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -28,6 +30,9 @@ mail = Mail(app)
 boostrap = Bootstrap(app)
 
 moment = Moment(app)
+
+babel = Babel(app)
+
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
@@ -65,6 +70,12 @@ if not app.debug:
 
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 # routes import is at the bottom, to avoid a circular dependency which is why this is at the bottom.
 from app import routes, models, errors
