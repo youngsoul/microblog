@@ -8,7 +8,7 @@ import logging
 import os
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
-
+from flask_moment import Moment
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -26,6 +26,8 @@ mail = Mail(app)
 
 # bootstrap initialization
 boostrap = Bootstrap(app)
+
+moment = Moment(app)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:

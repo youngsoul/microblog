@@ -77,7 +77,7 @@ To configure or override the config.py:
 *export MAIL_PORT=8025*
 
 
-### Flask Bootstrap
+### Chapter 11: Flask Bootstrap
 
 pip install flask-bootstrap
 
@@ -86,4 +86,15 @@ see *app/__init__.py* for how to import and initialize Flask Bootstrap
 Flask Bootstrap can render forms with a single call like:
 
 *{% import 'bootstrap/wtf.html' as wtf %}*
+
 *{{ wtf.quick_form(form) }}*
+
+### Chapter 12: Flask Moment
+
+pip install flask-moment
+
+**moment.js**
+
+[Moment JS Link](http://momentjs.com)
+
+
