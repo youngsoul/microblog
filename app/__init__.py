@@ -7,6 +7,8 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 import logging
 import os
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,6 +23,9 @@ login.login_view = 'login' # function to log a user in to protect a route
 
 # reference to the Mail object.
 mail = Mail(app)
+
+# bootstrap initialization
+boostrap = Bootstrap(app)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
