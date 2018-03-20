@@ -1,4 +1,5 @@
-2018-03-11 16:26:36,120 ERROR: Exception on /index [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+2018-03-12 21:57:21,398 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:60]
+2018-03-12 21:58:54,923 ERROR: Exception on /reset_password_request [POST] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,31 +13,13 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/app/routes.py", line 38, in index
-    return render_template('index.html', posts=posts, title='Home Page', form=form)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
-    context, ctx.app)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
-    rv = template.render(context)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/patryan/Development/python/microblog/app/templates/base.html", line 29, in top-level template code
-    {% block content %}{% endblock %}
-  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 6, in block "content"
-    {{ form.hiddent_tag() }}
-jinja2.exceptions.UndefinedError: 'app.forms.PostForm object' has no attribute 'hiddent_tag'
-2018-03-11 16:27:28,987 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:27:33,624 ERROR: Exception on /index [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 127, in reset_password_request
+    send_password_reset_email(user)
+  File "/Users/patryan/Development/python/microblog/app/email.py", line 21, in send_password_reset_email
+    sender=app.confg['ADMINS'][0],
+AttributeError: 'Flask' object has no attribute 'confg'
+2018-03-12 21:59:06,357 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:60]
+2018-03-12 22:00:27,301 ERROR: Exception on /reset_password/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZXNldF9wYXNzd29yZCI6MSwiZXhwIjoxNTIwOTEwNTY2LjI3MTk3OH0.dFZsOq_xqCUX3QzRt8c1oFf9HZHhHKfKi5Spk62HMoY [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -50,30 +33,10 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/app/routes.py", line 38, in index
-    return render_template('index.html', posts=posts, title='Home Page', form=form)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
-    context, ctx.app)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
-    rv = template.render(context)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/patryan/Development/python/microblog/app/templates/base.html", line 29, in top-level template code
-    {% block content %}{% endblock %}
-  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 6, in block "content"
-    {{ form.hiddent_tag() }}
-jinja2.exceptions.UndefinedError: 'app.forms.PostForm object' has no attribute 'hiddent_tag'
-2018-03-11 16:27:35,320 ERROR: Exception on /index [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 139, in reset_password
+    user = User.verify_reset_password_token(token)
+AttributeError: type object 'User' has no attribute 'verify_reset_password_token'
+2018-03-12 22:00:43,860 ERROR: Exception on /reset_password/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZXNldF9wYXNzd29yZCI6MSwiZXhwIjoxNTIwOTEwNTY2LjI3MTk3OH0.dFZsOq_xqCUX3QzRt8c1oFf9HZHhHKfKi5Spk62HMoY [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -87,33 +50,36 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/app/routes.py", line 38, in index
-    return render_template('index.html', posts=posts, title='Home Page', form=form)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
-    context, ctx.app)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
-    rv = template.render(context)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 139, in reset_password
+    user = User.verify_reset_password_token(token)
+AttributeError: type object 'User' has no attribute 'verify_reset_password_token'
+2018-03-12 22:00:44,167 ERROR: Exception on /reset_password/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZXNldF9wYXNzd29yZCI6MSwiZXhwIjoxNTIwOTEwNTY2LjI3MTk3OH0.dFZsOq_xqCUX3QzRt8c1oFf9HZHhHKfKi5Spk62HMoY [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/patryan/Development/python/microblog/app/templates/base.html", line 29, in top-level template code
-    {% block content %}{% endblock %}
-  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 6, in block "content"
-    {{ form.hiddent_tag() }}
-jinja2.exceptions.UndefinedError: 'app.forms.PostForm object' has no attribute 'hiddent_tag'
-2018-03-11 16:27:51,666 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:28:30,266 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:37:55,249 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:38:32,442 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:45:15,584 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 17:09:31,401 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 17:15:21,092 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 139, in reset_password
+    user = User.verify_reset_password_token(token)
+AttributeError: type object 'User' has no attribute 'verify_reset_password_token'
+2018-03-12 22:01:17,109 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:60]
+2018-03-19 09:42:44,637 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:60]
+2018-03-19 10:05:22,423 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:65]
+2018-03-19 14:40:52,179 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:67]
+2018-03-19 14:51:51,865 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-19 16:21:01,509 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-19 17:14:22,719 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-19 17:34:19,376 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-19 19:00:55,184 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-19 19:01:03,463 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-19 19:02:35,088 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-20 09:14:16,580 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:72]
+2018-03-20 11:08:00,019 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:74]

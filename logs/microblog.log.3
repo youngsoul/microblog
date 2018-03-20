@@ -1,4 +1,4 @@
-2018-03-11 15:02:51,063 ERROR: Exception on /user/susan [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+2018-03-11 16:25:25,604 ERROR: Exception on /index [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,51 +14,30 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/app/routes.py", line 103, in user
-    return render_template('user.html', user=user, posts=posts)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 133, in render_template
-    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 869, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 830, in get_template
-    return self._load_template(name, self.make_globals(globals))
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 804, in _load_template
-    template = self.loader.load(self, name, globals)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/loaders.py", line 125, in load
-    code = environment.compile(source, name, filename)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 591, in compile
-    self.handle_exception(exc_info, source_hint=source_hint)
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 38, in index
+    return render_template('index.html', posts=posts, title='Home Page')
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
+    context, ctx.app)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
+    rv = template.render(context)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
     reraise(exc_type, exc_value, tb)
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
-  File "/Users/patryan/Development/python/microblog/app/templates/user.html", line 19, in template
-    {% endif %}
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
-    return Parser(self, source, name, encode_filename(filename)).parse()
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
-    result = nodes.Template(self.subparse(), lineno=1)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
-    rv = self.parse_statement()
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
-    return getattr(self, 'parse_' + self.stream.current.value)()
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 268, in parse_block
-    node.body = self.parse_statements(('name:endblock',), drop_needle=True)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
-    result = self.subparse(end_tokens)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
-    rv = self.parse_statement()
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 144, in parse_statement
-    self.fail_unknown_tag(token.value, token.lineno)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 97, in fail_unknown_tag
-    return self._fail_ut_eof(name, self._end_token_stack, lineno)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 90, in _fail_ut_eof
-    self.fail(' '.join(message), lineno)
-  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 59, in fail
-    raise exc(msg, lineno, self.name, self.filename)
-jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
-2018-03-11 15:03:03,186 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 15:06:08,598 ERROR: Exception on /follow/user1 [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/patryan/Development/python/microblog/app/templates/base.html", line 29, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 6, in block "content"
+    {{ form.hiddent_tag() }}
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2018-03-11 16:25:27,842 ERROR: Exception on /index [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -74,13 +53,67 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/patryan/Development/python/microblog/app/routes.py", line 136, in follow
-    current_user.follow(user)
-  File "/Users/patryan/Development/python/microblog/app/models.py", line 47, in follow
-    if not self.is_following(followed_user):
-  File "/Users/patryan/Development/python/microblog/app/models.py", line 55, in is_following
-    return self.followed.filter(followers.c.followed_id == followed_user.id).count() > 0
-AttributeError: 'BaseQuery' object has no attribute 'id'
-2018-03-11 15:09:24,096 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 15:11:13,464 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
-2018-03-11 16:25:16,495 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 38, in index
+    return render_template('index.html', posts=posts, title='Home Page')
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
+    context, ctx.app)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
+    rv = template.render(context)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/patryan/Development/python/microblog/app/templates/base.html", line 29, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 6, in block "content"
+    {{ form.hiddent_tag() }}
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2018-03-11 16:25:57,984 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
+2018-03-11 16:26:13,815 ERROR: Exception on /index [GET] [in /Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/patryan/Development/python/microblog/app/routes.py", line 38, in index
+    return render_template('index.html', posts=posts, title='Home Page')
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
+    context, ctx.app)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
+    rv = template.render(context)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/patryan/Development/python/microblog/app/templates/base.html", line 29, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/patryan/Development/python/microblog/app/templates/index.html", line 6, in block "content"
+    {{ form.hiddent_tag() }}
+  File "/Users/patryan/Development/python/microblog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2018-03-11 16:26:34,491 INFO: Microblog startup [in /Users/patryan/Development/python/microblog/app/__init__.py:58]
