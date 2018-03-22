@@ -131,3 +131,142 @@ To update messages:
 
 Extract the messages.pot file again, it is a transient file that does not need to be source controlled.
 
+
+### Chapter 17 Linux Deployment
+
+Install Vagrant and Virtual box.
+
+See *Vagrantfile* in root of project
+
+type:  *vagrant up*
+
+to ssh into vagrant box: *vagrant ssh*
+
+In the Vagrant, Ubuntu shell:
+
+sudo apt-get -y update
+
+sudo apt-get -y install python3 python3-venv python3-dev
+
+sudo apt-get -y install mysql-server postfix supervisor nginx git
+
+after the vagrant box is setup,
+
+git clone <git repo from mg microblog.>
+
+cd repo
+
+python3 -m venv venv
+
+pip install -r requirements.txt
+
+pip install --upgrade pip
+
+pip install gunicorn  pymysql
+
+*create .env file*
+
+nano .env
+
+----- Contents ----
+
+SECRET_KEY=wponf972oiwbvgywigfbnopejhug
+
+MAIL_SERVER=localhost
+
+MAIL_PORT=25
+
+DATABASE_URL=mysql+pymysql://microblog:microblog@localhost:3306/microblog
+
+MS_TRANSLATOR_KEY=aaaaaaa
+
+------- End Contents --------
+
+
+add flask app to profile
+
+*echo "export FLASK_APP=microblog.py" >> ~/.profile*
+
+flask translate compile
+
+#### Create mysql db
+
+mysql -u root -p
+
+mysql> create database microblog character set utf8 collate utf8_bin;
+
+mysql> create user 'microblog'@'localhost' identified by 'microblog';
+
+mysql> grant all privileges on microblog.* to 'microblog'@'localhost';
+
+mysql> flush privileges;
+
+mysql> quit;
+
+*flask db upgrade*
+
+the above will use the values in .env to connect to the database and run the migrations
+
+#### Setup Supervisor, Gunicorn and Nginx
+
+##### Gunicorn
+
+
+*gunicorn -b localhost:8000 -w 4 microblog:app*
+
+if you use 0.0.0.0 instead of localhost then it is accessible outside the vagrant vm.
+
+But in general, we just want to expose Nginx.  Using 0.0.0.0 lets us test the webapp right away.
+
+*gunicorn -b 0.0.0.0:8000 -w 4 microblog:app*
+
+##### Supervisor
+
+sudo nano /etc/supervisor/conf.d/microblog.conf
+
+----- Contents ----
+[program:microblog]
+
+command=/home/vagrant/microblog/venv/bin/gunicorn -b 0.0.0.0:8000 -w 4 microblog:app
+
+directory=/home/vagrant/microblog
+
+user=vagrant
+
+autostart=true
+
+autorestart=true
+
+stopasgroup=true
+
+killasgroup=true
+
+----- End Contents -----
+
+*sudo supervisorctl reload*
+
+*sudo supervisorctl status*
+
+*sudo supervisorctl stop microblog*
+
+*sudo supervisorctl start microblog*
+exit
+
+##### Nginx
+
+Create a self signed certificate
+
+**letsencrypt is free cert company**
+
+*mkdir certs*
+
+*openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -keyout certs/key.pem -out certs/cert.pem*
+
+*sudo service nginx reload*
+
+
+#### To run on raspberry pi:
+
+sudo apt-get install supervisor
+
+sudo service supervisor restart
